@@ -1,0 +1,92 @@
+<!-- templates/navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand" href="{% url 'home' %}">LOGO</a>
+        
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Centered Navigation - Desktop -->
+            <div class="center-nav d-none d-lg-flex">
+                <ul class="navbar-nav">
+                    <!-- Home -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    
+                    <!-- Browse -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'browser' %}">Browser</a>
+                    </li>
+                    
+                    <!-- Map -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'map' %}">Map</a>
+                    </li>
+                    
+                    <!-- My Shelf Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="myShelfDropdown" role="button" data-bs-toggle="dropdown">
+                            My Shelf
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Saved</a></li>
+                            <li><a class="dropdown-item" href="#">Borrowed</a></li>
+                            <li><a class="dropdown-item" href="#">Purchased</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Mobile Navigation - Hidden on desktop -->
+            <div class="d-lg-none">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'browser' %}">Browser</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'map' %}">Map</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="mobileShelfDropdown" role="button" data-bs-toggle="dropdown">
+                            My Shelf
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Saved</a></li>
+                            <li><a class="dropdown-item" href="#">Borrowed</a></li>
+                            <li><a class="dropdown-item" href="#">Purchased</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Profile Dropdown - Desktop -->
+            <ul class="navbar-nav d-none d-lg-flex">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle profile-icon"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
