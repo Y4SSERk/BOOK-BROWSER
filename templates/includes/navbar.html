@@ -30,6 +30,7 @@
                     </li>
                     
                     <!-- My Shelf Dropdown -->
+                    {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="myShelfDropdown" role="button" data-bs-toggle="dropdown">
                             My Shelf
@@ -40,6 +41,7 @@
                             <li><a class="dropdown-item" href="#">Purchased</a></li>
                         </ul>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
             
@@ -55,6 +57,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'map' %}">Map</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="mobileShelfDropdown" role="button" data-bs-toggle="dropdown">
                             My Shelf
@@ -65,27 +68,55 @@
                             <li><a class="dropdown-item" href="#">Purchased</a></li>
                         </ul>
                     </li>
+                    {% endif %}
+                    
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="#">My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                        </form>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
             
             <!-- Profile Dropdown - Desktop -->
             <ul class="navbar-nav d-none d-lg-flex">
+                {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle profile-icon"></i>
+                        <i class="bi bi-person-circle profile-icon"></i> {{ user.username }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">My Profile</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                        <li>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
                     </ul>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item ms-2">
+                    <a class="btn btn-outline-primary" href="{% url 'signup' %}">Sign Up</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>
