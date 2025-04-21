@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Profile Overview -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="bi bi-person-circle display-1"></i>
+                    </div>
+                    <h5 class="card-title mb-0">{{ user.username }}</h5>
+                    <p class="text-muted">{{ user.email }}</p>
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'accounts:password_change' %}" class="btn btn-outline-primary">
+                            <i class="bi bi-key me-2"></i>Change Password
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Stats -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Library Statistics</h5>
+                    <div class="row g-4">
+                        <div class="col-sm-4">
+                            <div class="p-3 border rounded text-center">
+                                <h3 class="mb-1">{{ user.profile.shelves.saved.books.count }}</h3>
+                                <small class="text-muted">Saved Books</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="p-3 border rounded text-center">
+                                <h3 class="mb-1">{{ user.profile.shelves.borrowed.books.count }}</h3>
+                                <small class="text-muted">Borrowed Books</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="p-3 border rounded text-center">
+                                <h3 class="mb-1">{{ user.profile.shelves.purchased.books.count }}</h3>
+                                <small class="text-muted">Purchased Books</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

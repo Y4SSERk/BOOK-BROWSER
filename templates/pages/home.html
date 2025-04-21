@@ -5,20 +5,18 @@
 {% block content %}
 <div class="container py-5">
     {% if user.is_authenticated %}
-        <!-- Content for logged-in users -->
-        <h1>Welcome back, {{ user.username }}!</h1>
-        <!-- ... other content ... -->
+        <h1 class="mb-4">Welcome back, {{ user.username }}!</h1>
+        <!-- Add authenticated user content here -->
     {% else %}
-        <!-- Content for anonymous users -->
         <div class="text-center py-5">
             <h1 class="display-4 mb-4">Welcome to BookApp</h1>
             <p class="lead mb-4">Your personal library management system</p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-lg px-4 gap-3">
-                    Get Started
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Get Started
                 </a>
                 <a href="{% url 'accounts:signup' %}" class="btn btn-outline-secondary btn-lg px-4">
-                    Sign Up
+                    <i class="bi bi-person-plus me-2"></i>Sign Up
                 </a>
             </div>
         </div>

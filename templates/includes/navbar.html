@@ -3,78 +3,109 @@
 <!-- templates/navbar.html -->
 <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light shadow-sm">
     <div class="container">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
-            <span class="fw-bold">BookApp</span>
-        </a>
-        
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold" href="{% url 'home' %}">BookApp</a>
+
         <!-- Mobile Toggle -->
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
+        <!-- Navbar Content -->
         <div class="collapse navbar-collapse" id="navbarContent">
             {% if user.is_authenticated %}
-                <ul class="navbar-nav mx-auto">
+                <!-- Main Navigation -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" 
                            href="{% url 'home' %}">
-                            <i class="bi bi-house-door me-1"></i>Home
+                            <i class="bi bi-house-door"></i> Home
                         </a>
                     </li>
-                    
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'browser' %}active{% endif %}" 
                            href="{% url 'browser' %}">
-                            <i class="bi bi-book me-1"></i>Browse
+                            <i class="bi bi-book"></i> Browse
                         </a>
                     </li>
-                    
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'map' %}active{% endif %}" 
                            href="{% url 'map' %}">
-                            <i class="bi bi-geo-alt me-1"></i>Map
+                            <i class="bi bi-geo-alt"></i> Map
                         </a>
                     </li>
-                </ul>
-
-                <!-- User Menu -->
-                <ul class="navbar-nav ms-auto">
+                    <!-- My Shelf Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="shelfDropdown" role="button" 
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-bookshelf me-1"></i>My Shelf
+                            <i class="bi bi-bookshelf"></i> My Shelf
                         </a>
-                        <ul class="dropdown-menu shadow-sm">
+                        <ul class="dropdown-menu shadow-sm" aria-labelledby="shelfDropdown">
                             <li>
                                 <a class="dropdown-item" href="{% url 'shelf_saved' %}">
-                                    <i class="bi bi-bookmark me-2"></i>Saved Books
+                                    <i class="bi bi-bookmark"></i> Saved Books
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'shelf_borrowed' %}">
-                                    <i class="bi bi-arrow-left-right me-2"></i>Borrowed Books
+                                    <i class="bi bi-arrow-left-right"></i> Borrowed Books
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{% url 'shelf_purchased' %}">
-                                    <i class="bi bi-bag-check me-2"></i>Purchased Books
+                                    <i class="bi bi-bag-check"></i> Purchased Books
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <!-- User Profile Dropdown -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" 
+                           id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle fs-5 me-2"></i>
+                            <span>{{ user.username }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+                            <li>
+                                <span class="dropdown-item-text">
+                                    <small class="text-muted">Signed in as</small><br>
+                                    <strong>{{ user.email }}</strong>
+                                </span>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'accounts:profile' %}">
+                                    <i class="bi bi-person"></i> My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'accounts:password_change' %}">
+                                    <i class="bi bi-key"></i> Change Password
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}">
+                                    <i class="bi bi-box-arrow-right"></i> Sign Out
                                 </a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             {% else %}
-                <!-- Login/Signup buttons for non-authenticated users -->
+                <!-- Auth Buttons -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:login' %}">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                            <i class="bi bi-box-arrow-in-right"></i> Login
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-primary ms-2" href="{% url 'accounts:signup' %}">
-                            <i class="bi bi-person-plus me-1"></i>Sign Up
+                            <i class="bi bi-person-plus"></i> Sign Up
                         </a>
                     </li>
                 </ul>
