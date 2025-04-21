@@ -1,6 +1,27 @@
-{% extends 'base.html' %}
-{% block title %}Home{% endblock %}
+{% extends "base.html" %}
+
+{% block title %}Welcome to BookApp{% endblock %}
+
 {% block content %}
-    <h1>Welcome to the Home Page</h1>
-    <p>This is the home page of our website.</p>
+<div class="container py-5">
+    {% if user.is_authenticated %}
+        <!-- Content for logged-in users -->
+        <h1>Welcome back, {{ user.username }}!</h1>
+        <!-- ... other content ... -->
+    {% else %}
+        <!-- Content for anonymous users -->
+        <div class="text-center py-5">
+            <h1 class="display-4 mb-4">Welcome to BookApp</h1>
+            <p class="lead mb-4">Your personal library management system</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                    Get Started
+                </a>
+                <a href="{% url 'accounts:signup' %}" class="btn btn-outline-secondary btn-lg px-4">
+                    Sign Up
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

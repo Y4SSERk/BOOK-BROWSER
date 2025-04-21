@@ -16,12 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from apps.books.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    #path('accounts/', include('accounts.urls')),
-    path('', home, name='home'),
-    path('books/',include('apps.books.urls')),
+    path('', include('apps.books.urls')),  # Note: this matches the root URL
+    path('accounts/', include('apps.accounts.urls')),
 ]

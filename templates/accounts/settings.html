@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2>Account Settings</h2>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#profile" class="list-group-item list-group-item-action active">Profile</a>
+                <a href="#security" class="list-group-item list-group-item-action">Security</a>
+                <a href="#preferences" class="list-group-item list-group-item-action">Preferences</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile Settings</h5>
+                    <!-- Add your settings form here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

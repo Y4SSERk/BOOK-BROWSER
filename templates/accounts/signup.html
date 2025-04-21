@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <style>
+        .signup-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        .btn-signup {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .messages {
+            list-style: none;
+            padding: 0;
+        }
+        .success {
+            color: green;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-signup">Sign Up</button>
+        </form>
+        
+        <p style="margin-top: 15px; text-align: center;">
+            Already have an account? <a href="{% url 'accounts:login' %}">Login here</a>
+        </p>
+    </div>
+</body>
+</html>

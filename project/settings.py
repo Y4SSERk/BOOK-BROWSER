@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.accounts.apps.AccountsConfig',
+    'apps.accounts.apps.AccountsConfig',  
     'apps.books.apps.BooksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -136,9 +136,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# + Registration
-LOGIN_URL = 'auth:login'
-LOGIN_REDIRECT_URL = 'home'  
-LOGOUT_REDIRECT_URL = 'home'  
-
 AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'  # This will redirect to home page
+LOGOUT_REDIRECT_URL = '/'

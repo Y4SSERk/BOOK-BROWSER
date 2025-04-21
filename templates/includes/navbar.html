@@ -1,123 +1,84 @@
+{% load static %}
+
 <!-- templates/navbar.html -->
-<nav class="navbar navbar-expand-lg navbar-light sticky-top">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light shadow-sm">
+    <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand" href="{% url 'home' %}">LOGO</a>
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+            <span class="fw-bold">BookApp</span>
+        </a>
         
         <!-- Mobile Toggle -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
         
-        <!-- Navbar Content -->
         <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Centered Navigation - Desktop -->
-            <div class="center-nav d-none d-lg-flex">
-                <ul class="navbar-nav">
-                    <!-- Home -->
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    
-                    <!-- Browse -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'browser' %}">Browser</a>
-                    </li>
-                    
-                    <!-- Map -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'map' %}">Map</a>
-                    </li>
-                    
-                    <!-- My Shelf Dropdown -->
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="myShelfDropdown" role="button" data-bs-toggle="dropdown">
-                            My Shelf
+                        <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" 
+                           href="{% url 'home' %}">
+                            <i class="bi bi-house-door me-1"></i>Home
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Saved</a></li>
-                            <li><a class="dropdown-item" href="#">Borrowed</a></li>
-                            <li><a class="dropdown-item" href="#">Purchased</a></li>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'browser' %}active{% endif %}" 
+                           href="{% url 'browser' %}">
+                            <i class="bi bi-book me-1"></i>Browse
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'map' %}active{% endif %}" 
+                           href="{% url 'map' %}">
+                            <i class="bi bi-geo-alt me-1"></i>Map
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- User Menu -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="shelfDropdown" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-bookshelf me-1"></i>My Shelf
+                        </a>
+                        <ul class="dropdown-menu shadow-sm">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'shelf_saved' %}">
+                                    <i class="bi bi-bookmark me-2"></i>Saved Books
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'shelf_borrowed' %}">
+                                    <i class="bi bi-arrow-left-right me-2"></i>Borrowed Books
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'shelf_purchased' %}">
+                                    <i class="bi bi-bag-check me-2"></i>Purchased Books
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                    {% endif %}
                 </ul>
-            </div>
-            
-            <!-- Mobile Navigation - Hidden on desktop -->
-            <div class="d-lg-none">
-                <ul class="navbar-nav">
+            {% else %}
+                <!-- Login/Signup buttons for non-authenticated users -->
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'browser' %}">Browser</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'map' %}">Map</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="mobileShelfDropdown" role="button" data-bs-toggle="dropdown">
-                            My Shelf
+                        <a class="nav-link" href="{% url 'accounts:login' %}">
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Login
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Saved</a></li>
-                            <li><a class="dropdown-item" href="#">Borrowed</a></li>
-                            <li><a class="dropdown-item" href="#">Purchased</a></li>
-                        </ul>
-                    </li>
-                    {% endif %}
-                    
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <form method="post" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                            <button type="submit" class="nav-link btn btn-link">Logout</button>
-                        </form>
+                        <a class="btn btn-primary ms-2" href="{% url 'accounts:signup' %}">
+                            <i class="bi bi-person-plus me-1"></i>Sign Up
+                        </a>
                     </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
-                    </li>
-                    {% endif %}
                 </ul>
-            </div>
-            
-            <!-- Profile Dropdown - Desktop -->
-            <ul class="navbar-nav d-none d-lg-flex">
-                {% if user.is_authenticated %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle profile-icon"></i> {{ user.username }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">My Profile</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <form method="post" action="{% url 'logout' %}">
-                                {% csrf_token %}
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item ms-2">
-                    <a class="btn btn-outline-primary" href="{% url 'signup' %}">Sign Up</a>
-                </li>
-                {% endif %}
-            </ul>
+            {% endif %}
         </div>
     </div>
 </nav>

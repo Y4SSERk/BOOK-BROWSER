@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Borrowed Books{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2>Borrowed Books</h2>
+    <div class="row mt-4">
+        {% if books %}
+            {% for book in books %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">{{ book.authors|join:", " }}</p>
+                            <p class="text-muted">Due date: {{ book.due_date|default:"Not set" }}</p>
+                            <div class="mt-3">
+                                <button class="btn btn-success btn-sm">
+                                    <i class="bi bi-check2"></i> Return
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col">
+                <p>No borrowed books.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
