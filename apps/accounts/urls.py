@@ -8,13 +8,16 @@ urlpatterns = [
     path('signup/', views.SignUpView.as_view(), name='signup'),
     path('login/', views.login_view, name='login'),
     path('logout/', 
-         auth_views.LogoutView.as_view(next_page='/'), 
+         auth_views.LogoutView.as_view(
+             template_name='pages/home.html',
+             next_page='/'
+         ), 
          name='logout'),
     path('profile/', views.profile_view, name='profile'),
     path('password-change/', 
          auth_views.PasswordChangeView.as_view(
              template_name='accounts/password_change.html',
-             success_url='done/'
+             success_url='/accounts/password-change/done/'
          ),
          name='password_change'
     ),

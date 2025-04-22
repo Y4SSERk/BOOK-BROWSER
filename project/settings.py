@@ -100,6 +100,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -138,6 +141,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
 
+# Authentication settings
+"""
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+"""
+
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'  # This will redirect to home page
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'  # This ensures redirect to home page after logout
