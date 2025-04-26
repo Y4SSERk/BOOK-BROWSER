@@ -1,23 +1,218 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Welcome to BookApp{% endblock %}
 
 {% block content %}
 <div class="container py-5">
     {% if user.is_authenticated %}
-        <h1 class="mb-4">Welcome back, {{ user.username }}!</h1>
-        <!-- Add authenticated user content here -->
+        <!-- Authenticated User Dashboard -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="hero-section p-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <h1 class="hero-title mb-3">Welcome back, {{ user.username }}!</h1>
+                            <p class="hero-subtitle">Continue your literary journey with BookApp. Track, discover, and enjoy your favorite books all in one place.</p>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <i class="bi bi-book-half display-1 text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="row mb-5">
+            <div class="col-12 mb-4">
+                <h2 class="fw-bold">Your Library Overview</h2>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="stat-card bg-white">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Saved Books</div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="stat-card bg-white">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Currently Reading</div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="stat-card bg-white">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Completed Books</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Activity & Recommendations -->
+        <div class="row">
+            <!-- Recent Activity -->
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Recent Activity</h3>
+                        
+                        <div class="activity-item d-flex align-items-center mb-3 pb-3 border-bottom">
+                            <div class="activity-icon me-3 bg-light rounded-circle p-2">
+                                <i class="bi bi-bookmark-check text-primary"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">You saved "The Midnight Library"</h6>
+                                <p class="text-muted small mb-0">2 days ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item d-flex align-items-center mb-3 pb-3 border-bottom">
+                            <div class="activity-icon me-3 bg-light rounded-circle p-2">
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">You rated "Project Hail Mary" 5 stars</h6>
+                                <p class="text-muted small mb-0">1 week ago</p>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item d-flex align-items-center">
+                            <div class="activity-icon me-3 bg-light rounded-circle p-2">
+                                <i class="bi bi-book text-success"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1">You finished reading "Dune"</h6>
+                                <p class="text-muted small mb-0">2 weeks ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommendations -->
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Recommended For You</h3>
+                        
+                        <div class="recommendation-item d-flex mb-3 pb-3 border-bottom">
+                            <img src="{% static 'images/placeholder-book.jpg' %}" alt="Book Cover" class="me-3" style="width: 60px; height: 90px; object-fit: cover;">
+                            <div>
+                                <h6 class="mb-1">The Song of Achilles</h6>
+                                <p class="text-muted small mb-2">Madeline Miller</p>
+                                <div class="text-warning small">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                    <span class="text-muted ms-1">4.7</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendation-item d-flex">
+                            <img src="{% static 'images/placeholder-book.jpg' %}" alt="Book Cover" class="me-3" style="width: 60px; height: 90px; object-fit: cover;">
+                            <div>
+                                <h6 class="mb-1">Circe</h6>
+                                <p class="text-muted small mb-2">Madeline Miller</p>
+                                <div class="text-warning small">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <span class="text-muted ms-1">4.3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0">
+                        <a href="{% url 'browser' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-search me-2"></i>Discover More Books
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     {% else %}
-        <div class="text-center py-5">
-            <h1 class="display-4 mb-4">Welcome to BookApp</h1>
-            <p class="lead mb-4">Your personal library management system</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-lg px-4 gap-3">
-                    <i class="bi bi-box-arrow-in-right me-2"></i>Get Started
-                </a>
-                <a href="{% url 'accounts:signup' %}" class="btn btn-outline-secondary btn-lg px-4">
-                    <i class="bi bi-person-plus me-2"></i>Sign Up
-                </a>
+        <!-- Guest Welcome Page -->
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <h1 class="display-4 fw-bold mb-4">Your Personal Library, Reimagined</h1>
+                <p class="lead mb-4">BookApp helps you track, discover, and organize your reading life. Join thousands of readers who have transformed their relationship with books.</p>
+                <div class="d-grid gap-3 d-sm-flex">
+                    <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-lg px-4 gap-3">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Get Started
+                    </a>
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-outline-secondary btn-lg px-4">
+                        <i class="bi bi-person-plus me-2"></i>Sign Up
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="{% static 'images/reading-illustration.svg' %}" alt="Reading Illustration" class="img-fluid" style="max-height: 400px;" onerror="this.src='https://placehold.co/600x400?text=BookApp'">
+            </div>
+        </div>
+        
+        <!-- Feature Highlights -->
+        <div class="row mt-5 pt-5">
+            <div class="col-12 text-center mb-5">
+                <h2 class="fw-bold">Why Readers Love BookApp</h2>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-primary bg-opacity-10 text-primary rounded-circle p-3 mb-4 mx-auto" style="width: 70px; height: 70px;">
+                            <i class="bi bi-search fs-3"></i>
+                        </div>
+                        <h4 class="card-title">Discover</h4>
+                        <p class="card-text">Find new books based on your reading history and preferences. Explore curated lists and recommendations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-success bg-opacity-10 text-success rounded-circle p-3 mb-4 mx-auto" style="width: 70px; height: 70px;">
+                            <i class="bi bi-journal-check fs-3"></i>
+                        </div>
+                        <h4 class="card-title">Track</h4>
+                        <p class="card-text">Keep a record of books you've read, want to read, and are currently reading. Set reading goals and track your progress.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-warning bg-opacity-10 text-warning rounded-circle p-3 mb-4 mx-auto" style="width: 70px; height: 70px;">
+                            <i class="bi bi-people fs-3"></i>
+                        </div>
+                        <h4 class="card-title">Connect</h4>
+                        <p class="card-text">Share your reading journey with friends. Join reading groups and discuss your favorite books with a community of readers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <div class="card bg-primary text-white p-5 border-0">
+                    <div class="card-body py-5">
+                        <h2 class="card-title fw-bold mb-4">Ready to Start Your Reading Journey?</h2>
+                        <p class="card-text mb-4">Join thousands of readers who have transformed their relationship with books.</p>
+                        <a href="{% url 'accounts:signup' %}" class="btn btn-light btn-lg px-5">
+                            <i class="bi bi-person-plus me-2"></i>Sign Up Now - It's Free
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     {% endif %}
